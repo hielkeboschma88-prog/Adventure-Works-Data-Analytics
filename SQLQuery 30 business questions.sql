@@ -349,7 +349,7 @@ Een actieve klant is iemand die binnen 1 jaar nog een bestelling heeft gedaan*/
 
 -- stap 1: Bereken hoeveel klanten er waren in 2013
 
-
+CREATE VIEW churn AS
 
 WITH cte_customers1 AS (
 							SELECT DISTINCT
@@ -471,7 +471,6 @@ FROM cte_omzet_pm_pc
 	
 /* 25 Vind de 3 best presterende sales employees per regio.*/ 
 
-
 -- Stap 1. Starttabel maken en relatie leggen zodat elke order gekoppeld is aan een werknemer en regio
 WITH cte_selecttabel AS (SELECT 
 						de.EmployeeKey,
@@ -535,6 +534,47 @@ ORDER BY
 		
 
 /* 26 Bereken customer lifetime value per klant.*/ 
+
+-- Formule: CLV = gemiddelde aankoopwaarde X aankoopfrequentie X klantduur x winstmarge
+
+/* Stap 1: Check op beide salestabellen op dubbelingen. Beide tabellen hebben verschillende orders.
+SELECT SalesOrderNumber, SalesOrderLineNumber
+FROM dbo.FactInternetSales
+WHERE SalesOrderNumber IN (SELECT SalesOrderNumber FROM dbo.FactResellerSales) */
+
+-- Stap 2. Een startselectie van velden maken en samenvoegen tot 1 tabel om mee te werken. Ik gebruik alleen internetsales, de resellersales is niet te herleiden naar een klant. Hierop kan later een losse analyse worden gemaakt ter vergelijking.
+WITH cte_starttable AS (
+		SELECT
+			SalesOrderNumber,
+			SalesOrderLineNumber,
+			CustomerKey,
+			OrderDate,
+			TotalProductCost,
+			SalesAmount,
+			(SalesAmount * 1.00 / TotalProductCost - 1) * 100 AS ProfitMarginPct
+
+		FROM dbo.FactInternetSales),
+
+total_orderamount AS (
+		SELECT
+			SUM(SalesAmount) as TotalSalesPerCustomer,
+			CustomerKey
+
+			FROM cte_starttable
+			GROUP BY CustomerKey)
+
+SELECT 
+	t1.*,
+	t2.TotalSalesPerCustomer
+FROM cte_starttable t1
+	LEFT JOIN total_orderamount t2 ON
+		t1.CustomerKey = t2.CustomerKey
+
+
+
+
+
+
 
 /* 27 Vind klanten die hun bestedingen maand-op-maand verhogen. */ 
 
