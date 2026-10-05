@@ -9,4 +9,7 @@ Vervolgens de database AdventureWorks2025 gedownload op Kaggle en op mijn eigen 
 Hierna heb ik 30 businessvragen geprompt via ChatGPT. Daarbij worden de vraagstukken steeds ingewikkelder.
 Voor ieder vraagstuk schrijf ik SQL code om een databron te maken waarmee het vraagstuk kan worden opgelost.
 
+Ondertussen werk ik met veel plezier bij ANWB Verzekeren als Data Analytics Engineer (tijdelijke rol).
+
+
 
