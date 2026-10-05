@@ -5,6 +5,7 @@ Begin 2026 heb ik kennisgemaakt met de rollen die er zijn om waarde te halen uit
 Om mijn SQL vaardigheden te ontwikkelen heb ik verschillende curssusen gevolgd. Vervolgens de database AdventureWorks2025 gedownload op Kaggle en op mijn eigen SQL Server Studio geimporteerd.
 
 Hierna heb ik 30 businessvragen geprompt via ChatGPT. Daarbij worden de vraagstukken steeds ingewikkelder. Voor ieder vraagstuk schrijf ik SQL code om een databron te maken waarmee het vraagstuk kan worden opgelost. Deze zijn te vinden in de map Scripts.
+Vanaf vraag 21 wordt het complexer en heb ik 1 file per script gemaakt.
 
 Ondertussen werk ik met veel plezier bij ANWB Verzekeren als Data Analytics Engineer (tijdelijke rol).
 
